@@ -6,6 +6,7 @@
 <mapper namespace="usermapper">
 	<select id="select" resultType="com.myspring.dto.UserVO">
 		select * from t_member
+		<include refid="search"></include>
 	</select>	
 	<!-- id, pw, name, email, joindate -->
 	<insert id="insert">
@@ -35,4 +36,23 @@
 		select count(*) from T_member
 		where id = #{id}
 	</select>
+	
+	<sql id="search">
+           <choose>
+                <!-- 전체 검색인 경우 -->
+                <when test="searchOption == 'all'">
+                     WHERE 1 = 1
+                     AND
+                           (id like '%'||#{keyword}||'%'
+                           OR pwd like '%'||#{keyword}||'%'
+                           OR  name like '%'||#{keyword}||'%')           
+                </when>
+                
+                <!-- 전체 검색이 아닌경우 -->
+                <otherwise>
+                     WHERE 1 = 1
+                     AND ${searchOption} like '%'||#{keyword}||'%'
+                </otherwise>
+           </choose>
+     </sql>
 </mapper>  

@@ -1,6 +1,10 @@
 package com.myspring.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +24,16 @@ public class UserController {
 	SqlSession sqlSession;
 	
 	@RequestMapping("/list")
-	public String selectList(Model model) {
+	public String selectList(Model model
+			, @RequestParam(value = "searchOption", defaultValue = "id") String searchOption
+			, @RequestParam(value = "keyword", defaultValue = "") String keyword) {
 		
-		List<UserVO> selectAll = sqlSession.selectList("usermapper.select");
+		Map<String, Object> parammap = new HashMap<String, Object>();
+		
+		parammap.put("searchOption", searchOption);
+		parammap.put("keyword", keyword);
+		
+		List<UserVO> selectAll = sqlSession.selectList("usermapper.select",parammap);
 		model.addAttribute("selectAll", selectAll);
 		
 		System.out.println("selectAll: "+ selectAll);
@@ -77,7 +88,9 @@ public class UserController {
 	
 	@ResponseBody
 	@RequestMapping("/idcheck")
-	public String idcheck(@RequestParam("id") String id) {
+	public String idcheck(HttpServletRequest request) {
+		
+		String id = request.getParameter("id").trim();	// 중간에 공백은 제거 못해! ex. h ong => hong (x)
 		
 		int resultCount = sqlSession.selectOne("usermapper.idcheck", id);
 		

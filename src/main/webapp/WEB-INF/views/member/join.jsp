@@ -17,7 +17,8 @@ $(document).ready(function(){
             url: "/member/idcheck",
             data: {"id" : $("#id").val()},            // formData : ajax로 전달할 폼 객체 , 가상의 <form> 태그
             // formData.append("file", file); 한
-           success: function(result){
+            dataType : "json",
+           	success: function(result){
                if(parseInt(result) == 1){
             		$("#id-msg").show(); 
                }else{
