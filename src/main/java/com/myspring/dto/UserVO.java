@@ -6,7 +6,7 @@ public class UserVO {
 
 //	id pw name email joindate
 	private String id;
-	private String pw;
+	private String pwd;
 	private String name;
 	private String email;
 	private Date joindate;
@@ -17,11 +17,11 @@ public class UserVO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getPw() {
-		return pw;
+	public String getPwd() {
+		return pwd;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
 	}
 	public String getName() {
 		return name;
@@ -44,7 +44,7 @@ public class UserVO {
 	
 	@Override
 	public String toString() {
-		return "UserVO [id=" + id + ", pw=" + pw + ", name=" + name + ", email=" + email + ", joindate=" + joindate
+		return "UserVO [id=" + id + ", pwd=" + pwd + ", name=" + name + ", email=" + email + ", joindate=" + joindate
 				+ "]";
 	}
 	

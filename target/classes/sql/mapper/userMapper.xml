@@ -7,4 +7,27 @@
 	<select id="select" resultType="com.myspring.dto.UserVO">
 		select * from t_member
 	</select>	
+	<!-- id, pw, name, email, joindate -->
+	<insert id="insert">
+		INSERT INTO t_member 
+		VALUES (#{id}, #{pwd}, #{name}, #{email}, sysdate)
+	</insert>
+	
+	<select id="view" resultType="com.myspring.dto.UserVO">
+		select * from T_member
+		where id = #{id}
+	</select>
+	
+	<update id="modify">
+		update t_member set
+		pwd=#{pwd},
+		name=#{name},
+		email=#{email}
+		where id=#{id}
+	</update>
+	
+	<delete id="delete">
+		delete from t_member
+		where id = #{id}
+	</delete>
 </mapper>  
