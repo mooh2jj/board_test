@@ -7,6 +7,6 @@
 <title>header</title>
 </head>
 <body>
-<a href="/member/join">등록하기</a>
+<a href="/member/join">회원가입하기</a>
 </body>
 </html>

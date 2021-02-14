@@ -11,19 +11,24 @@
 		
 		var actionForm = $("#actionForm");
 		$("#modify").on("click", function(e){
+			
+			if(confirm("수정하시겠습니까?")){
 			//alert("hi modify");
-			e.preventDefault();
-			actionForm.attr("action","/member/modify");
-			actionForm.attr("method","post");
-			actionForm.submit();
+				e.preventDefault();
+				actionForm.attr("action","/member/modify");
+				actionForm.attr("method","post");
+				actionForm.submit();
+			}
 		});
 		
 		$("#delete").on("click", function(e){
 			//alert("hi modify");
-			e.preventDefault();
-			actionForm.attr("action","/member/delete");
-			actionForm.attr("method","post");
-			actionForm.submit();
+			if(confirm("삭제하시겠습니까?")){
+				e.preventDefault();
+				actionForm.attr("action","/member/delete");
+				actionForm.attr("method","post");
+				actionForm.submit();
+			}
 		});	
 	});
 </script>
@@ -32,8 +37,8 @@
 <a href="/member/list">list</a>
 <h3>view</h3>
 
-<form id="actionForm">
-	id :<input type="text" name="id" value="${viewOne.id}"/><br>
+<form id="actionForm" >
+	id :<input type="text" name="id" value="${viewOne.id}" readonly="readonly"/><br>
 	pw :<input type="text" name="pwd" value="${viewOne.pwd}"/><br>
 	name :<input type="text" name="name" value="${viewOne.name}"/><br>
 	email :<input type="text" name="email" value="${viewOne.email}"/><br>

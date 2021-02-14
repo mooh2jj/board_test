@@ -5,13 +5,82 @@
 <head>
 <meta charset="UTF-8">
 <title>join</title>
+<script type="text/javascript">
+function checkForm() {
+    /* alert(id.value); */
+    form.id.value = form.id.value.trim();
+    if (form.id.value.length == 0) {
+         alert("로그인 아이디를 입력해주세요.");
+         form.id.focus();
+         return false;
+    }
+    
+    if( form.id.value.length < 4){
+         alert('로그인 아이디를 4자 이상 입력해주세요.');
+         form.id.focus();
+         return false;
+    }
+    
+    if( isAlphaNumeric(form.id.value) == false ){
+         alert('로그인 아이디를 영문자 소문자와 숫자만 사용할 수 있습니다.');
+         form.id.focus();
+         
+         return false;
+    }
+    
+    form.id.value = form.id.value.toLowerCase();
+    
+    form.pwd.value = form.pwd.value.trim();
+    if (form.pwd.value.length == 0) {
+         alert("로그인 비밀번호를 입력해주세요.");
+         form.pwd.focus();
+         return false;
+    }
+    form.pwdConfirm.value = form.pwdConfirm.value.trim();
+    if (form.pwdConfirm.value.length == 0) {
+         alert("로그인 비밀번호 확인을 입력해주세요.");
+         form.pwdConfirm.focus();
+         return false;
+    }
+    if (form.pwdConfirm.value != form.pwdConfirm.value) {
+         alert('로그인 비밀번호 확인이 일치하지 않습니다.');
+         form.pwdConfirm.focus();
+         return false;
+    }
+    if (form.name.value != form.name.value) {
+         alert('로그인 이름을  입력해주세요.');
+         form.name.focus();
+         return false;
+    }
+    
+    if( form.name.value.length < 2){
+         alert('로그인 이름을 2자 이상 입력해주세요.');
+         form.name.focus();
+         return false;
+    }
+    form.submit();
+}
+	
+function isAlphaNumeric(str) {
+        var code, i, len;
+        for (i = 0, len = str.length; i < len; i++) {
+          code = str.charCodeAt(i);
+          if (!(code > 47 && code < 58) && // numeric (0-9)
+              !(code > 64 && code < 91) && // upper alpha (A-Z)
+              !(code > 96 && code < 123)) { // lower alpha (a-z)
+            return false;
+          }
+        }
+        return true;
+}
+</script>
 </head>
 <body>
 <a href="/member/list">list</a>
 <h3>join</h3>
-<form action="/member/insert" method="post">
-	id :<input type="text" name="id" readonly="readonly"/><br>
-	pw :<input type="text" name="pw"/><br>
+<form name="form" onsubmit="return checkForm();" action="/member/insert" method="post">
+	id :<input type="text" name="id"/><br>
+	pw :<input type="text" name="pwd"/><br>
 	name :<input type="text" name="name"/><br>
 	email :<input type="text" name="email"/><br>
 	<button type="submit">등록</button>
