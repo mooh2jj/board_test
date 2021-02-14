@@ -162,7 +162,19 @@
                 <version>12.1.0.2.0</version>
                 <scope>system</scope>
                 <systemPath>${basedir}/src/main/webapp/WEB-INF/lib/ojdbc6.jar</systemPath>
-           </dependency>   
+           </dependency>  
+           
+           <!-- json ResponseBody쓸때 사용해야함! -->
+           <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.9.13</version>
+           </dependency>
+           <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.8.5</version>
+           </dependency> 
 	</dependencies>
     <build>
         <plugins>

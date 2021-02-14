@@ -5,7 +5,30 @@
 <head>
 <meta charset="UTF-8">
 <title>join</title>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
 <script type="text/javascript">
+
+$(document).ready(function(){
+	$("#id-msg").hide();
+	// 입력폼에서 벗어날 때 작동
+	$("input[name='id']").blur(function(){
+        $.ajax({
+            type: "post",
+            url: "/member/idcheck",
+            data: {"id" : $("#id").val()},            // formData : ajax로 전달할 폼 객체 , 가상의 <form> 태그
+            // formData.append("file", file); 한
+           success: function(result){
+               if(parseInt(result) == 1){
+            		$("#id-msg").show(); 
+               }else{
+           			$("#id-msg").hide(); 
+               }
+            }
+       });
+	});
+});
+
+// 등록버튼 누를시 작동
 function checkForm() {
     /* alert(id.value); */
     form.id.value = form.id.value.trim();
@@ -73,13 +96,15 @@ function isAlphaNumeric(str) {
         }
         return true;
 }
+
+
 </script>
 </head>
 <body>
 <a href="/member/list">list</a>
 <h3>join</h3>
 <form name="form" onsubmit="return checkForm();" action="/member/insert" method="post">
-	id :<input type="text" name="id"/><br>
+	id :<input type="text" name="id" id="id"/><span id="id-msg" style="color:red; font-size:0.8em;">중복된 아이디입니다.</span><br>
 	pw :<input type="text" name="pwd"/><br>
 	name :<input type="text" name="name"/><br>
 	email :<input type="text" name="email"/><br>

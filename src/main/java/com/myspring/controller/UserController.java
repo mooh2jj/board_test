@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.myspring.dto.UserVO;
 
@@ -73,5 +74,22 @@ public class UserController {
 		
 		return "redirect:list";
 	}
+	
+	@ResponseBody
+	@RequestMapping("/idcheck")
+	public String idcheck(@RequestParam("id") String id) {
+		
+		int resultCount = sqlSession.selectOne("usermapper.idcheck", id);
+		
+		System.out.println("idcheck 되었음...id:"+id);
+		
+		String result = String.valueOf(resultCount);
+		
+		System.out.println("idcheck_result :"+result);
+		
+		return result;
+	}
+	
+	
 	
 }
